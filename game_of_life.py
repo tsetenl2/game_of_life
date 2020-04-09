@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*- 
 from random import random
-from sys import stdout, argv
+from sys import stdout, argv, exit
 from time import sleep
+
 
 class Game:
   def __init__(self, size):
@@ -10,11 +11,12 @@ class Game:
 
   def stringify(self):
     rep = '\n'
+    rep += '---' * self.size 
     for row in self.grid:
       for val in row:
-        rep += val
-        rep += '   '
+        rep += val + '  '
       rep += '\n'
+    rep += '---' * self.size 
     return rep
 
   def create_grid(self):
@@ -40,14 +42,21 @@ class Game:
 
   def update(self):
     n = self.size
-    has_updated = False
+    updated = False
     for i in range(n):
       for j in range(n):
         count = self.check_neighbors(i, j)
         if count < 2 or count > 3:
+          if self.grid[i][j] != '':
+            updated = True
           self.grid[i][j] = ''
         elif count == 3:
+          if self.grid[i][j] != '❖':
+            updated = True
           self.grid[i][j] = '❖'
+    if not updated:
+      exit()
+
 
 if __name__ == '__main__':
   game = Game(int(argv[1]))

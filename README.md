@@ -8,6 +8,7 @@ Implementation of [Conway's Game of Life](https://en.wikipedia.org/wiki/Conway%2
 
 
 To run the script, specify the size of n x n grid and number of iterations.
+The script will stop after the number of iterations specified or cells cease to update
 For a 10 x 10 grid and 300 iterations run:
 ```
 python game_of_life.py 10 300
