@@ -12,7 +12,7 @@ class Game:
     for row in self.grid:
       for val in row:
         rep += val
-        rep += ' '
+        rep += '   '
       rep += '\n'
     return rep
 
@@ -30,9 +30,8 @@ class Game:
   def check_neighbors(self, i, j):
     n = self.size
     count = 0
-    coords = [(i + 1, j), (i + 1, j + 1), (i, j + 1), (i - 1, j + 1), 
-              (i - 1, j), (i - 1, j - 1), (i, j - 1), (i + 1, j - 1)]
-    coords = list(filter(lambda pair: pair[0] >= 0 and pair[0] < n and pair[1] >= 0 and pair[1] < n, coords))
+    coords = [((i + 1) % (n - 1), j), ((i + 1) % (n - 1), (j + 1) % (n - 1)), (i, (j + 1) % (n - 1)), (abs(i - 1) % (n - 1), (j + 1) % (n - 1)), 
+              (abs(i - 1) % (n - 1), j), (abs(i - 1) % (n - 1), abs(j - 1) % (n - 1)), (i, abs(j - 1) % (n - 1)), ((i + 1) % (n - 1), abs(j - 1) % (n - 1))]
     for (x, y) in coords:
       if self.grid[x][y] == '*':
         count += 1
