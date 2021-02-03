@@ -45,17 +45,22 @@ class Game:
     updated = False
     for i in range(n):
       for j in range(n):
-        count = self.check_neighbors(i, j)
-        if count < 2 or count > 3:
-          if self.grid[i][j] != '':
-            updated = True
-          self.grid[i][j] = ''
-        elif count == 3:
-          if self.grid[i][j] != '❖':
-            updated = True
-          self.grid[i][j] = '❖'
+        updated = self.grid_updated(i, j)
     if not updated:
       exit()
+
+  def grid_updated(self, i, j):
+    updated = False
+    count = self.check_neighbors(i, j)
+    if count < 2 or count > 3:
+      if self.grid[i][j] != '':
+        updated = True
+      self.grid[i][j] = ''
+    elif count == 3:
+      if self.grid[i][j] != '❖':
+        updated = True
+      self.grid[i][j] = '❖'
+    return updated
 
 
 if __name__ == '__main__':
